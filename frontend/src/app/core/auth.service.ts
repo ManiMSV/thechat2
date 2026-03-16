@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   fetchCurrentUser(): Observable<User> {
-    return this.http.get<User>('/api/users/me').pipe(
+    return this.http.get<User>(`${environment.apiBaseUrl}api/users/me`).pipe(
       tap(user => {
         this._currentUser$.next(user);
         this.cacheUser(user);
