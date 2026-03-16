@@ -26,11 +26,11 @@ export class AuthService {
   }
 
   register(data: { username: string; email: string; password: string }) {
-    return this.http.post(`${environment.apiBaseUrl}api/auth/register`, data);
+    return this.http.post(`${environment.apiBaseUrl}/auth/register`, data);
   }
 
   login(data: { email: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}api/auth/login`, data).pipe(
+    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/auth/login`, data).pipe(
       tap(res => {
         localStorage.setItem(this.tokenKey, res.access_token);
         this.fetchCurrentUser().subscribe();
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   fetchCurrentUser(): Observable<User> {
-    return this.http.get<User>(`${environment.apiBaseUrl}api/users/me`).pipe(
+    return this.http.get<User>(`${environment.apiBaseUrl}/users/me`).pipe(
       tap(user => {
         this._currentUser$.next(user);
         this.cacheUser(user);

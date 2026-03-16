@@ -28,7 +28,7 @@ export class WebsocketService {
     }
     const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
     this.socket = new WebSocket(
-      `${protocol}://${window.location.host}/api/ws/${this.conversationId}?token=${this.token}`
+      `${protocol}://${window.location.host}//ws/${this.conversationId}?token=${this.token}`
     );
     this.socket.onmessage = event => {
       try { this.messages$.next(JSON.parse(event.data)); } catch {}
