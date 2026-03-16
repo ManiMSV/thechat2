@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class WebsocketService {
@@ -26,9 +27,10 @@ export class WebsocketService {
       this.socket.close();
       this.socket = null;
     }
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    const baseUrl = environment.apiBaseUrl || `${window.location.protocol}//${window.location.host}`;
+    const wsUrl = baseUrl.replace(/^http/, 'ws');
     this.socket = new WebSocket(
-      `${protocol}://${window.location.host}//ws/${this.conversationId}?token=${this.token}`
+      `${wsUrl}/ws/${this.conversationId}?token=${this.token}`
     );
     this.socket.onmessage = event => {
       try { this.messages$.next(JSON.parse(event.data)); } catch {}
