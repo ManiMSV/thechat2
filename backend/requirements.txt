@@ -1,0 +1,7 @@
+fastapi[all]
+uvicorn[standard]
+motor
+python-jose[cryptography]
+bcrypt
+python-dotenv
+

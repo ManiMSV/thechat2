@@ -1,0 +1,16 @@
+<div class="conv-list">
+  @for (c of conversations; track c.id) {
+    <a class="conv-item" [routerLink]="['/chat', c.id]" routerLinkActive="active">
+      <div class="avatar">{{ getAvatarLetter(c) }}</div>
+      <div class="conv-info">
+        <div class="conv-top">
+          <span class="conv-name">{{ getDisplayName(c) }}</span>
+          <span class="conv-time">{{ formatTime(c.last_message_at) }}</span>
+        </div>
+        <div class="conv-preview">Tap to open chat</div>
+      </div>
+    </a>
+  } @empty {
+    <p class="empty-list">No conversations yet.<br>Start one with the + button.</p>
+  }
+</div>

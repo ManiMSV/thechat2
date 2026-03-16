@@ -1,0 +1,38 @@
+<div class="backdrop" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>New Chat</h3>
+      <button class="close-btn" (click)="close()">&#10005;</button>
+    </div>
+
+    <div class="search-row">
+      <input
+        [(ngModel)]="query"
+        (keyup.enter)="search()"
+        placeholder="Search by username…"
+        autofocus
+      />
+      <button (click)="search()" [disabled]="loading || !query.trim()">
+        {{ loading ? '…' : 'Search' }}
+      </button>
+    </div>
+
+    @if (error) {
+      <p class="err-msg">{{ error }}</p>
+    }
+
+    <div class="results">
+      @for (u of results; track u.id) {
+        <div class="result-item" (click)="startChat(u)">
+          <span class="avatar">{{ u.username[0].toUpperCase() }}</span>
+          <span class="uname">{{ u.username }}</span>
+          <span class="action">Chat →</span>
+        </div>
+      } @empty {
+        @if (searched && !loading) {
+          <p class="empty">No users found for "{{ query }}"</p>
+        }
+      }
+    </div>
+  </div>
+</div>

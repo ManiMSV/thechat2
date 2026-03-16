@@ -1,0 +1,43 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="brand">&#128172; ChatApp</span>
+      <div class="sidebar-actions">
+        <button class="icon-btn" (click)="showNewChat = true" title="New chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <button class="icon-btn logout-btn" (click)="logout()" title="Logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    @if (currentUser) {
+      <div class="me-row">
+        <span class="me-avatar">{{ currentUser.username[0].toUpperCase() }}</span>
+        <span class="me-name">{{ currentUser.username }}</span>
+      </div>
+    }
+
+    <app-conversation-list></app-conversation-list>
+  </aside>
+
+  <main class="main-panel">
+    <router-outlet></router-outlet>
+    @if (!isConversationOpen) {
+      <div class="welcome">
+        <div class="welcome-icon">&#128172;</div>
+        <h3>Select a conversation</h3>
+        <p>or start a new chat to begin messaging</p>
+      </div>
+    }
+  </main>
+</div>
+
+@if (showNewChat) {
+  <app-new-chat-modal (closed)="showNewChat = false"></app-new-chat-modal>
+}

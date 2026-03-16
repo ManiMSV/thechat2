@@ -1,0 +1,90 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .875rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.brand { font-weight: 700; font-size: 1.05rem; color: #1a1a1a; }
+
+.sidebar-actions { display: flex; gap: .4rem; }
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: background .15s, color .15s;
+}
+
+.icon-btn:hover { background: #e9e9ff; color: #6366f1; }
+.logout-btn:hover { background: #ffe9e9 !important; color: #e53935 !important; }
+
+.me-row {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .7rem 1rem;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+.me-avatar {
+  width: 30px;
+  height: 30px;
+  background: #6366f1;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.me-name { font-size: .85rem; font-weight: 600; color: #333; }
+
+.main-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  color: #999;
+}
+
+.welcome-icon { font-size: 3rem; }
+.welcome h3 { color: #555; font-size: 1.1rem; margin: 0; }
+.welcome p { font-size: .88rem; margin: 0; }

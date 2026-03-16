@@ -1,0 +1,52 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Create account</h2>
+    <p class="subtitle">Join ChatApp today</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Username</label>
+        <input formControlName="username" placeholder="e.g. john_doe" />
+        @if (f('username').touched && f('username').hasError('required')) {
+          <span class="err">Username is required</span>
+        } @else if (f('username').touched && f('username').hasError('minlength')) {
+          <span class="err">At least 3 characters</span>
+        } @else if (f('username').touched && f('username').hasError('maxlength')) {
+          <span class="err">Maximum 20 characters</span>
+        } @else if (f('username').touched && f('username').hasError('pattern')) {
+          <span class="err">Letters, numbers and underscores only</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="you@example.com" />
+        @if (f('email').touched && f('email').hasError('required')) {
+          <span class="err">Email is required</span>
+        } @else if (f('email').touched && f('email').hasError('email')) {
+          <span class="err">Enter a valid email address</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input formControlName="password" type="password" placeholder="Min. 8 characters" />
+        @if (f('password').touched && f('password').hasError('required')) {
+          <span class="err">Password is required</span>
+        } @else if (f('password').touched && f('password').hasError('minlength')) {
+          <span class="err">Minimum 8 characters</span>
+        }
+      </div>
+
+      @if (error) {
+        <p class="alert">{{ error }}</p>
+      }
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Creating account…' : 'Create account' }}
+      </button>
+    </form>
+
+    <p class="link">Already have an account? <a routerLink="/login">Sign in</a></p>
+  </div>
+</div>

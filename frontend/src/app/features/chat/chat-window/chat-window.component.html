@@ -1,0 +1,29 @@
+<div class="chat-window">
+  <div class="messages-area">
+    @for (m of messages; track m.id) {
+      <div class="msg-row" [class.mine]="isMine(m)" [class.theirs]="!isMine(m)">
+        <div class="bubble">
+          <p>{{ m.content }}</p>
+          <span class="ts">{{ formatTime(m.created_at) }}</span>
+        </div>
+      </div>
+    } @empty {
+      <div class="no-messages">No messages yet. Say hello! &#128075;</div>
+    }
+    <div #messagesEnd></div>
+  </div>
+
+  <div class="input-bar">
+    <input
+      [(ngModel)]="input"
+      (keyup.enter)="send()"
+      placeholder="Type a message…"
+    />
+    <button (click)="send()" [disabled]="!input.trim()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>

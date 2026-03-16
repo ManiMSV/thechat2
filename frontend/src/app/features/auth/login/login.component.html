@@ -1,0 +1,36 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Welcome back</h2>
+    <p class="subtitle">Sign in to continue</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Email</label>
+        <input formControlName="email" type="email" placeholder="you@example.com" />
+        @if (f('email').touched && f('email').hasError('required')) {
+          <span class="err">Email is required</span>
+        } @else if (f('email').touched && f('email').hasError('email')) {
+          <span class="err">Enter a valid email address</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input formControlName="password" type="password" placeholder="••••••••" />
+        @if (f('password').touched && f('password').hasError('required')) {
+          <span class="err">Password is required</span>
+        }
+      </div>
+
+      @if (error) {
+        <p class="alert">{{ error }}</p>
+      }
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Signing in…' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="link">No account? <a routerLink="/register">Register</a></p>
+  </div>
+</div>
