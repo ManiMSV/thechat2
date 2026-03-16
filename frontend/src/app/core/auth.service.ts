@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../shared/models/user.model';
+import { environment } from '../../environments/environment';
+
 
 interface LoginResponse {
   access_token: string;
@@ -24,11 +26,11 @@ export class AuthService {
   }
 
   register(data: { username: string; email: string; password: string }) {
-    return this.http.post('/api/auth/register', data);
+    return this.http.post(`${environment.apiBaseUrl}api/auth/register`, data);
   }
 
   login(data: { email: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/api/auth/login', data).pipe(
+    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}api/auth/login`, data).pipe(
       tap(res => {
         localStorage.setItem(this.tokenKey, res.access_token);
         this.fetchCurrentUser().subscribe();
